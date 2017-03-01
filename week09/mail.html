@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Week 09 Assignment</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+    $("#type").change(function () {
+        var val = $(this).val();
+        if (val == "Letters (Stamped)" || val == "Letters (Metered)") {
+            $("#size").html("<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='3.5'>3.5</option>");
+        } else if (val == "Large Envelopes (Flats)" || val == "Parcels") {
+            $("#size").html(
+            "<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option> <option value='12'>12</option><option value='13'>13</option>"
+            );
+        }
+    });
+});
+</script>
+</head>
+<body>
+ <h1 style="text-align: center;"> A web application that<br>determines the postage required for a single piece of<br>retail first-class mail</h1>
+ 
+ <form style="text-align: center;" method="get" action="/getRate">
+	 
+
+	Type of mail :
+	<br> 
+	<select id="type" name="type">
+	  <option value="Letters (Stamped)">Letters (Stamped)</option>
+	  <option value="Letters (Metered)">Letters (Metered)</option>
+	  <option value="Large Envelopes (Flats)">Large Envelopes (Flats)</option>
+	  <option value="Parcels">Parcels</option>
+	</select>
+	<br>
+	<br>
+	Weight of mail :
+	<br>  
+	<select id="size" name="weight">
+    <option value="">-- select one -- </option>
+	</select>
+	<br>
+	<br> 
+	<input type="submit" value="Submit">
+</form>
+	
+</body>
+</html>

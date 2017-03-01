@@ -91,7 +91,7 @@ function display(type, weight, res)
     if(weight == 4 && (type == "Letters (Stamped)" || type == "Letters (Metered)"))
          weight = 3.5;
 
-    res.render('displayOrder.ejs', {type : type, weight : weight, price : price });
+    res.render('page/displayOrder.ejs', {type : type, weight : weight, price : price });
 }
 
 

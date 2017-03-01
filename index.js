@@ -125,7 +125,7 @@ function getRate(weight, type)
       
       return array[weight - 1];
 
-   }else if( type == "Percils"){
+   }else if( type == "Parcels"){
 
       var array = ["2.67","2.67","2.67","2.67","2.85","3.03","3.21",
       "3.39","3.57","3.75","3.93","4.11","4.29"];
@@ -133,6 +133,6 @@ function getRate(weight, type)
       return array[weight - 1];
 
    }else{
-      return "Uknown type!";
+      return "Uknown type. Please re-enter options...";
    }
 }

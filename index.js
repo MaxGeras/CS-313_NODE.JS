@@ -15,7 +15,7 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-
+// Team Activity
 app.get('/math', function(request, response) {
   
   console.log("Proccesing.....");
@@ -23,6 +23,7 @@ app.get('/math', function(request, response) {
 
 });
 
+// action="/getRate" from the form 
 app.get('/getRate', function(request, response) {
   
   console.log("Proccesing.....");
@@ -30,23 +31,25 @@ app.get('/getRate', function(request, response) {
 
 });
 
-
+// Searching for 5000
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
 
+ 
+ /******************************************************************
+ *
+ *  Team activity portion of the assignment 
+ ********************************************************************/  
 function parseDataMath(req, res)
 {
-
   var url = req.url;
   var queryData = uRl.parse(req.url, true).query;
 
   operations(queryData.operation, Number(queryData.left), Number(queryData.right), res); 
 
 }
-
-
 
 function operations(op, left, right, res)
 {
@@ -68,7 +71,10 @@ function operations(op, left, right, res)
     res.render('pages/display.ejs', {op : op, left : left, right: right, result: result});
 }
 
-
+/***********************************************************************/
+ 
+ // Week 09 Assignment 
+// Parse URL to get Weight and Type of mail 
 
 function parseData(req, res)
 {
@@ -82,10 +88,11 @@ function parseData(req, res)
 
 
 
+// Display and get price
 function display(type, weight, res)
 {
 
-    var price = calculatePrice(weight, type);
+    var price = getRate(weight, type);
 
      // re assign to real weight
     if(weight == 4 && (type == "Letters (Stamped)" || type == "Letters (Metered)"))
@@ -94,8 +101,8 @@ function display(type, weight, res)
     res.render('pages/displayOrder.ejs', {type : type, weight : weight, price : price });
 }
 
-
-function calculatePrice(weight, type)
+ // Fiind the Right Rate
+function getRate(weight, type)
 {
    
    if( type == "Letters (Stamped)")

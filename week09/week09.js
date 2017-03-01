@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var uRl = require('url');
 
-app.set('port', (process.env.PORT || 8000));
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/'));
 
@@ -44,14 +44,13 @@ function parseData(req, res)
 function display(type, weight, res)
 {
 
-    // access an array element
-    // whole numbers
-    if(weight == 3.5)
-      newWeight = 4;
+    var price = calculatePrice(weight, type);
 
-    var price = calculatePrice(newWeight, type);
+     // re assign to real weight
+    if(weight == 4 && (type == "Letters (Stamped)" || type == "Letters (Metered)"))
+         weight = 3.5;
 
-    res.render('display.ejs', {type : type, weight : weight, price : price });
+    res.render('displayOrder.ejs', {type : type, weight : weight, price : price });
 }
 
 

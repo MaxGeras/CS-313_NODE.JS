@@ -19,7 +19,7 @@ app.get('/', function(request, response) {
 app.get('/math', function(request, response) {
   
   console.log("Proccesing.....");
-  parseData(request,response);
+  parseDataMath(request,response);
 
 });
 
@@ -36,7 +36,7 @@ app.listen(app.get('port'), function() {
 });
 
 
-function parseData(req, res)
+function parseDataMath(req, res)
 {
 
   var url = req.url;
@@ -91,7 +91,7 @@ function display(type, weight, res)
     if(weight == 4 && (type == "Letters (Stamped)" || type == "Letters (Metered)"))
          weight = 3.5;
 
-    res.render('page/displayOrder.ejs', {type : type, weight : weight, price : price });
+    res.render('pages/displayOrder.ejs', {type : type, weight : weight, price : price });
 }
 
 

@@ -1,0 +1,143 @@
+.myBox
+{ 
+	background-color: lightgrey;
+    width: 500px;
+    border: 10px solid Grey;
+    padding: 15px;
+    margin: 0 auto;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+html 
+{
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: url(https://s-media-cache-ak0.pinimg.com/736x/cb/3a/a8/cb3aa86b87a8d9ccc70665bca2a79b9e.jpg) 
+  no-repeat center center fixed;    
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#id 
+{
+	color: BlueViolet;
+	background-color: DarkGrey;
+    font-size: 25px;
+}
+
+.myBox1
+{ 
+	background-color: lightgrey;
+    width: 500px;
+    text-align: left;
+    border: 10px solid Lime;
+    padding: 15px;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.myBox2
+{ 
+	
+}
+
+.buttom
+{
+	position:absolute;
+	bottom:0;
+	background-color: DarkCyan; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: -5%;
+    padding: 14px 40px;
+
+}
+
+.button
+{
+	background-color: DarkBlue; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 20%;
+    cursor: pointer;
+    margin: auto;
+    padding: 14px 40px;
+}
+
+#head
+{
+	color: Navy;
+}
+
+.button2 {
+    background-color: Aquamarine; 
+    color: black; 
+    border: 2px solid #008CBA;
+    margin: auto;
+    width: 20%;
+    border: 3px solid Lime;
+    padding: 10px;
+}
+
+.button2:hover {
+    background-color: Lime;
+    color: white;
+}
+
+.final {
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    border: 3px solid Lime;
+    background-color: DarkSlateGrey;
+    padding: 10px;
+    color: white;
+}
+
+.final1
+{
+	width: 10%;
+	margin-top: 10%;
+}
+
+#myProgress {
+
+	margin-left: auto;
+    margin-right: auto;
+    width: 0px;
+  	background-color: lightgrey;
+  	border-radius: 25px;
+}
+
+#myBar {
+
+  width: 0%;
+  height: 30px;
+  background-color: DeepSkyBlue;
+  line-height: 30px;
+  color: DarkSlateGray;
+  border-radius: 25px;
+}
+
+
+
+
+

@@ -1,6 +1,79 @@
 var express = require('express');
 var app = express();
+var path = require('path');
 var uRl = require('url');
+var pg = require('pg');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded())
+
+app.use(bodyParser.json()); 
+
+pg.defaults.ssl = true;
+ 
+// to run a query we can acquire a client from the pool, 
+// run a query on the client, and then return the client to the pool 
+app.get('/getquiz', function(request, response) {
+  
+     var myId = request.query.id;
+    
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+       const results = [];
+
+        const query = client.query('SELECT * FROM quiz');
+        // Stream results back one row at a time
+        query.on('row', (row) => {
+          if(row.id == myId) //myId )
+          {
+            results.push(row);  
+          }
+        });
+        // After all data is returned, close connection and return results
+        query.on('end', () => {
+          done();
+         return response.json(results);
+    });
+
+  });
+});
+
+
+app.get('/getanswer', function(request, response) {
+  
+     var answer = request.query.answer;
+     var myId = request.query.id;
+      console.log(myId);
+      console.log(answer);
+   
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+           const results = [];
+client
+            const query = client.query('SELECT * FROM quiz');
+            // Stream results back one row at a time
+            query.on('row', (row) => {
+              if(row.id == myId) //myId )
+              {
+              	if(row.answer === answer)
+                results.push(row);
+                else
+                results.push('{"answer":"false"}');  
+              }
+            });
+            // After all data is returned, close connection and return results
+            query.on('end', () => {
+              done();
+             return response.json(results);
+        });
+
+    });
+});
+ 
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -16,20 +89,12 @@ app.get('/', function(request, response) {
 });
 
 // Team Activity
-app.get('/math', function(request, response) {
-  
-  console.log("Proccesing.....");
-  parseDataMath(request,response);
-
+app.get('/home', function(request, response) {
+  response.send("Hello World");
+  //parseDataMath(request,response);
 });
 
-// action="/getRate" from the form 
-app.get('/getRate', function(request, response) {
-  
-  console.log("Proccesing.....");
-  parseData(request,response);
 
-});
 
 // Searching for 5000
 app.listen(app.get('port'), function() {
@@ -37,102 +102,3 @@ app.listen(app.get('port'), function() {
 });
 
 
- 
- /******************************************************************
- *
- *  Team activity portion of the assignment 
- ********************************************************************/  
-function parseDataMath(req, res)
-{
-  var url = req.url;
-  var queryData = uRl.parse(req.url, true).query;
-
-  operations(queryData.operation, Number(queryData.left), Number(queryData.right), res); 
-
-}
-
-function operations(op, left, right, res)
-{
-    var result = 0;
-
-    if( op == "Add"){
-        result = left + right;
-    }
-    else if(op == "Subtract"){
-        result = left - right;
-    }
-    else if(op == "Divide"){
-        result = left / right;
-    }
-    else if(op == "Multiply"){
-        result = left * right;
-    }
- 
-    res.render('pages/display.ejs', {op : op, left : left, right: right, result: result});
-}
-
-/***********************************************************************/
- 
- // Week 09 Assignment 
-// Parse URL to get Weight and Type of mail 
-
-function parseData(req, res)
-{
-
-  var url = req.url;
-  var queryData = uRl.parse(req.url, true).query;
-
-  display(queryData.type, Number(queryData.weight), res); 
-
-}
-
-
-
-// Display and get price
-function display(type, weight, res)
-{
-
-    var price = getRate(weight, type);
-
-     // re assign to real weight
-    if(weight == 4 && (type == "Letters (Stamped)" || type == "Letters (Metered)"))
-         weight = 3.5;
-
-    res.render('pages/displayOrder.ejs', {type : type, weight : weight, price : price });
-}
-
- // Fiind the Right Rate
-function getRate(weight, type)
-{
-   
-   if( type == "Letters (Stamped)")
-   {
-
-     var array = ["0.49","0.70","0.91","1.12"];
-     
-     return array[weight - 1];
-
-   }else if( type == "Letters (Metered)"){
-      
-      var array = ["0.46","0.67","0.88","1.09"];
-      
-      return array[weight - 1];
-
-   }else if( type == "Large Envelopes (Flats)"){
-
-      var array = ["0.98","1.19","1.40","1.61","1.82",
-      "2.03","2.24","2.45","2.66","2.87", "3.08", "3.29", "3.50"];
-      
-      return array[weight - 1];
-
-   }else if( type == "Parcels"){
-
-      var array = ["2.67","2.67","2.67","2.67","2.85","3.03","3.21",
-      "3.39","3.57","3.75","3.93","4.11","4.29"];
-      
-      return array[weight - 1];
-
-   }else{
-      return "Uknown type. Please re-enter options...";
-   }
-}

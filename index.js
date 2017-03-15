@@ -33,7 +33,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
         });
         // After all data is returned, close connection and return results
         query.on('end', () => {
-          done();
+          //done();
          return response.json(results);
     });
 

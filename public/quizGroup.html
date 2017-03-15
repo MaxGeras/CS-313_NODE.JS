@@ -176,7 +176,7 @@ function resetBackground(){
 		            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
 		            document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
 		            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
-		            move();
+		            document.getElementById("button1").style.visibility = "hidden";
 
            }
 
@@ -233,7 +233,8 @@ function resetBackground(){
 <form action="" method="get" id="form">
 
 <input type="hidden" id="id" value="1" >
-	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1">Start Quiz</button> 
+	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1">
+	 Start Quiz</button> 
 
 </form>
 

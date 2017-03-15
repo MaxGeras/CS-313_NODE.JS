@@ -33,7 +33,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
         });
         // After all data is returned, close connection and return results
         query.on('end', () => {
-          //done();
+          done();
          return response.json(results);
     });
 
@@ -50,7 +50,7 @@ var myId = request.query.id;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
-  
+
            const results = [];
             const query = client.query('SELECT * FROM quiz');
             // Stream results back one row at a time
@@ -65,6 +65,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
             });
             // After all data is returned, close connection and return results
             query.on('end', () => {
+            	done();
              return response.json(results);
         });
 

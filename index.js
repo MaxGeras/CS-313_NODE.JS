@@ -14,7 +14,7 @@ pg.defaults.ssl = true;
 // run a query on the client, and then return the client to the pool 
 app.get('/getquiz', function(request, response) {
   
-     var myId = request.query.id;
+var myId = request.query.id;
     
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   
@@ -53,8 +53,8 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
-           const results = [];
-            const query = client.query('SELECT * FROM quiz');
+        const results = [];
+        const query = client.query('SELECT * FROM quiz');
             // Stream results back one row at a time
             query.on('row', (row) => {
               if(row.id == myId) //myId )
@@ -70,7 +70,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             	done();
              return response.json(results);
         });
-
     });
 });
  
@@ -93,7 +92,6 @@ app.get('/home', function(request, response) {
   response.send("Hello World");
   //parseDataMath(request,response);
 });
-
 
 
 // Searching for 5000

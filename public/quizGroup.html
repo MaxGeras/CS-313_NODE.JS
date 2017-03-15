@@ -5,11 +5,11 @@
 	   <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>	
        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
-	<script type="text/javascript">
+<script type="text/javascript">
           
-           // Find quiz by id in database
-           var id = 0;
-           var width = 0;
+// Find quiz by id in database
+var id = 0;
+var width = 0;
 
          
 $(function(){
@@ -28,8 +28,8 @@ $(function(){
         	{
                 id++;
 
-                 if(id != 1)
-             	move();
+                if(id != 1)
+             		move();
             }
             else
             {
@@ -108,124 +108,122 @@ function resetBackground(){
 
             
 
-           function ChangeColor(elementId)
-           {
+function ChangeColor(elementId)
+{
 
-           		if( document.getElementById(elementId).style.backgroundColor != "green")
-           		{
-           			document.getElementById(elementId).style.background = "Navy";
-  					document.getElementById(elementId).style.color = "White";
-  				}
-           }
+		if( document.getElementById(elementId).style.backgroundColor != "green")
+		{
+			document.getElementById(elementId).style.background = "Navy";
+			document.getElementById(elementId).style.color = "White";
+		}
+}
 
-           function changeBack(elementId)
-           {
-           		if( document.getElementById(elementId).style.backgroundColor != "green")
-           		{
-           			document.getElementById(elementId).style.background = "lightgrey";
-  					document.getElementById(elementId).style.color = "Black";
-          		 }
-           }
+function changeBack(elementId)
+{
+		if( document.getElementById(elementId).style.backgroundColor != "green")
+		{
+			document.getElementById(elementId).style.background = "lightgrey";
+			document.getElementById(elementId).style.color = "Black";
+		 }
+}
 
-           function checkAnswer(elementId){
+function checkAnswer(elementId){
 
-           	    var data = {};
-					data.answer = document.getElementById(elementId).getAttribute('value');
-					data.id = id;
-				
+	    var data = {};
+		data.answer = document.getElementById(elementId).getAttribute('value');
+		data.id = id;
+	
 
-           		$.ajax({
-						type: 'get',
-						data: data,
-				        contentType: 'application/json',
-                        url: 'https://pure-sands-99613.herokuapp.com/getanswer',						
-                        success: function(data) {
+		$.ajax({
+			type: 'get',
+			data: data,
+	        contentType: 'application/json',
+            url: 'https://pure-sands-99613.herokuapp.com/getanswer',						
+            success: function(data) {
 
-                            console.log('success');
-                            console.log(data);
+                console.log('success');
+                console.log(data);
 
-                            var myData = JSON.stringify(data);
-                            var parseDate = JSON.parse(myData);
-                            if (parseDate[0].answer === undefined || parseDate[0].answer === null) {
-                               document.getElementById(elementId).style.backgroundColor = "red";
-							}	
-							else{
-                              document.getElementById(elementId).style.backgroundColor = "green";
-                            }
+                var myData = JSON.stringify(data);
+                var parseDate = JSON.parse(myData);
+                if (parseDate[0].answer === undefined || parseDate[0].answer === null) {
+                   document.getElementById(elementId).style.backgroundColor = "red";
+				}	
+				else{
+                  document.getElementById(elementId).style.backgroundColor = "green";
+                }
 
-                        }
-                    });
-
-           }
-
-
-           function resetAll(){
-
-           	 		document.getElementById("question").innerHTML = "";
-		            document.getElementById("option1").innerHTML = "";
-		            document.getElementById("option2").innerHTML = "";
-		            document.getElementById("option3").innerHTML = "";
-		            document.getElementById("option4").innerHTML = "";
-		            document.getElementById("button1").innerHTML = "Press Ok";
-		            document.getElementById("head").innerHTML = "";
-		            document.getElementById("final").innerHTML = "Congratulations! You have completed the Quiz";
-		            document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox2");
-		            document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
-		            document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
-		            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
-		            document.getElementById("button1").style.visibility = "hidden";
-
-           }
-
-
-             function move() {
-
-					var elem = document.getElementById('myBar');
-					
-					width += 10;
-					var myId = setInterval(frame, 10);
-					function frame() {
-					if (width > 100) {
-					  clearInterval(myId);
-					} else {
-					  elem.style.width = width + '%'; 
-					  elem.innerHTML = width * 1  + '%';
-					}
-				}
-			}
-
-
-
-			function mDown(obj) {
-			   if( document.getElementById('option1').style.background == "green" ||
-                   document.getElementById('option2').style.background == "green" ||
-                   document.getElementById('option3').style.background == "green" || 
-                   document.getElementById('option4').style.background == "green" 
-                    		)
-			   {
- 			   	   obj.style.backgroundColor = "Lime";
-    		   	   obj.innerHTML = "Correct Answer";
-    		   }
-    		   else if( id ===0)
-    		   {
-
-    		   }
-    		   else
-    		   {
-    		   	   obj.style.backgroundColor = "Red";
-    		   	   obj.innerHTML = "Select Answer";
-    		   }
-			}
-
-			function mUp(obj) {
-    			obj.style.backgroundColor="DarkBlue";
- 
             }
+        });
+}
 
-  	</script>
+
+function resetAll(){
+
+	 		document.getElementById("question").innerHTML = "";
+        document.getElementById("option1").innerHTML = "";
+        document.getElementById("option2").innerHTML = "";
+        document.getElementById("option3").innerHTML = "";
+        document.getElementById("option4").innerHTML = "";
+        document.getElementById("button1").innerHTML = "Press Ok";
+        document.getElementById("head").innerHTML = "";
+        document.getElementById("final").innerHTML = "Congratulations! You have completed the Quiz";
+        document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox2");
+        document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
+        document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
+        document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
+        document.getElementById("button1").style.visibility = "hidden";
+
+}
+
+
+function move() {
+
+		var elem = document.getElementById('myBar');
+		
+		width += 10;
+		var myId = setInterval(frame, 10);
+		function frame() {
+		if (width > 100) {
+		  clearInterval(myId);
+		} else {
+		  elem.style.width = width + '%'; 
+		  elem.innerHTML = width * 1  + '%';
+		}
+	}
+}
+
+
+
+function mDown(obj) {
+   if( document.getElementById('option1').style.background == "green" ||
+       document.getElementById('option2').style.background == "green" ||
+       document.getElementById('option3').style.background == "green" || 
+       document.getElementById('option4').style.background == "green" )
+   {
+	   	   obj.style.backgroundColor = "Lime";
+   	   obj.innerHTML = "Correct Answer";
+   }
+   else if( id ===0)
+   {
+
+   }
+   else
+   {
+   	   obj.style.backgroundColor = "Red";
+   	   obj.innerHTML = "Select Answer";
+   }
+}
+
+function mUp(obj) {
+	obj.style.backgroundColor="DarkBlue";
+
+}
+
+</script>
 </head>
 <body>
 <h1 id="head">Welcome Group 3</h1>

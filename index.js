@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded())
 
 app.use(bodyParser.json()); 
 
-pg.defaults.ssl = true;
+//pg.defaults.ssl = true;
  
 // to run a query we can acquire a client from the pool, 
 // run a query on the client, and then return the client to the pool 
@@ -21,7 +21,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
-  client
        const results = [];
 
         const query = client.query('SELECT * FROM quiz');

@@ -4,10 +4,9 @@ var path = require('path');
 var uRl = require('url');
 var pg = require('pg');
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded())
-
-app.use(bodyParser.json()); 
+//var bodyParser = require('body-parser');
+//app.use(bodyParser.urlencoded())
+//app.use(bodyParser.json()); 
 
 pg.defaults.ssl = true;
  
@@ -17,7 +16,7 @@ app.get('/getquiz', function(request, response) {
   
      var myId = request.query.id;
     
-pg.connect(process.env.DATABASE_URL, function(err, client) {
+pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   
   if (err) throw err;
 
@@ -36,6 +35,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
         });
         // After all data is returned, close connection and return results
         query.on('end', () => {
+         done();	
          return response.json(results);
     });
 
@@ -49,7 +49,7 @@ var answer = request.query.answer;
 var myId = request.query.id;
 
    
-pg.connect(process.env.DATABASE_URL, function(err, client) {
+pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
@@ -67,6 +67,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
             });
             // After all data is returned, close connection and return results
             query.on('end', () => {
+            	done();
              return response.json(results);
         });
 

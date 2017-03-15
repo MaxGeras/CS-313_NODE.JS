@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded())
 
 app.use(bodyParser.json()); 
 
-//pg.defaults.ssl = true;
+pg.defaults.ssl = true;
  
 // to run a query we can acquire a client from the pool, 
 // run a query on the client, and then return the client to the pool 

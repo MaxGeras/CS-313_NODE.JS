@@ -138,11 +138,12 @@
 						type: 'get',
 						data: data,
 				        contentType: 'application/json',
-                        url: 'http://localhost:5000/getanswer',						
+                        url: 'https://pure-sands-99613.herokuapp.com/getanswer',						
                         success: function(data) {
 
                             console.log('success');
                             console.log(data);
+                            
                             var myData = JSON.stringify(data);
                             var parseDate = JSON.parse(myData);
                             if (parseDate[0].answer === undefined || parseDate[0].answer === null) {

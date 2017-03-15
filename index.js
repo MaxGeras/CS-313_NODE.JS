@@ -43,16 +43,15 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
 
 app.get('/getanswer', function(request, response) {
   
-     var answer = request.query.answer;
-     var myId = request.query.id;
-      console.log(myId);
-      console.log(answer);
+var answer = request.query.answer;
+var myId = request.query.id;
+
    
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
+  
            const results = [];
-client
             const query = client.query('SELECT * FROM quiz');
             // Stream results back one row at a time
             query.on('row', (row) => {
@@ -66,7 +65,6 @@ client
             });
             // After all data is returned, close connection and return results
             query.on('end', () => {
-              done();
              return response.json(results);
         });
 

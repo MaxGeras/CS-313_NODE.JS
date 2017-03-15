@@ -23,6 +23,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
 
   console.log('Connected to postgres! Getting schemas...');
 
+        // My array 
        const results = [];
 
         const query = client.query('SELECT * FROM quiz');

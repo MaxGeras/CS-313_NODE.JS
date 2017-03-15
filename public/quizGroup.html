@@ -12,99 +12,99 @@
            var width = 0;
 
          
-           $(function(){
+$(function(){
 
-                $('.button').click(function(e){
-                    e.preventDefault();
-                    
-                    if( id < 10)
-                    {
-                        // Advance only if there is a correct answer
-                    	if( document.getElementById('option1').style.background == "green" ||
-                    		document.getElementById('option2').style.background == "green" ||
-                    		document.getElementById('option3').style.background == "green" || 
-                    		document.getElementById('option4').style.background == "green" ||
-                    		id == 0)
-                    	{
-	                        id++;
+    $('.button').click(function(e){
+        e.preventDefault();
+        
+        if( id < 10)
+        {
+            // Advance only if there is a correct answer
+        	if( document.getElementById('option1').style.background == "green" ||
+        		document.getElementById('option2').style.background == "green" ||
+        		document.getElementById('option3').style.background == "green" || 
+        		document.getElementById('option4').style.background == "green" ||
+        		id == 0)
+        	{
+                id++;
 
-	                         if(id != 1)
-                         	move();
-	                    }
-	                    else
-	                    {
+                 if(id != 1)
+             	move();
+            }
+            else
+            {
 
-	                    }
+            }
 
-                         
-                        // Reset
-	                    resetBackground();
+             
+            // Reset
+            resetBackground();
 
-						var data = {};
-							data.id = id;
-							
-							$.ajax({
-								type: 'get',
-								data: data,
-						        contentType: 'application/json',
-		                        url: 'https://pure-sands-99613.herokuapp.com/getquiz',						
-		                        success: function(data) {
+			var data = {};
+				data.id = id;
+				
+				$.ajax({
+					type: 'get',
+					data: data,
+			        contentType: 'application/json',
+                    url: 'https://pure-sands-99613.herokuapp.com/getquiz',						
+                    success: function(data) {
 
-		                            console.log('success');
-		                            console.log(data);
-		                            var myData = JSON.stringify(data);
-		                            var parseDate = JSON.parse(myData);
+                        console.log('success');
+                        console.log(data);
+                        var myData = JSON.stringify(data);
+                        var parseDate = JSON.parse(myData);
 
-                                    parseJson(parseDate);
+                        parseJson(parseDate);
 
-		                        }
-		                    });
-					}
-					else
-					{
-						resetAll();
-					}
-                });				
-            });
+                    }
+                });
+		}
+		else
+		{
+			resetAll();
+		}
+    });				
+});
 
-           function parseJson(parseDate)
-           {
+function parseJson(parseDate)
+{
 
-		        document.getElementById("question").innerHTML = id + ". " + parseDate[0].question;
-		        document.getElementById("option1").innerHTML = parseDate[0].option1;
-		        document.getElementById("option2").innerHTML = parseDate[0].option2;
-	            document.getElementById("option3").innerHTML = parseDate[0].option3;
-	            document.getElementById("option4").innerHTML = parseDate[0].option4;
-	            document.getElementById("button1").innerHTML = "Next Question";
-	            document.getElementById("head").innerHTML = "Ten Questions About Countries";
+    document.getElementById("question").innerHTML = id + ". " + parseDate[0].question;
+    document.getElementById("option1").innerHTML = parseDate[0].option1;
+    document.getElementById("option2").innerHTML = parseDate[0].option2;
+    document.getElementById("option3").innerHTML = parseDate[0].option3;
+    document.getElementById("option4").innerHTML = parseDate[0].option4;
+    document.getElementById("button1").innerHTML = "Next Question";
+    document.getElementById("head").innerHTML = "Ten Questions About Countries";
 
-	            document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox");
-	            document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox1"); 
-	            if( id == 1)
-	            {
-	                document.getElementById('myProgress').setAttribute("style","width:500px");	
-	            	document.getElementById("myBar").innerHTML = "0%";	
-	           	}
-	            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "buttom");
-           }
+    document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox");
+    document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox1"); 
+    if( id == 1)
+    {
+        document.getElementById('myProgress').setAttribute("style","width:500px");	
+    	document.getElementById("myBar").innerHTML = "0%";	
+   	}
+    document.getElementsByTagName("BUTTON")[0].setAttribute("class", "buttom");
+}
 
-           function resetBackground(){
-                
-                // Reset Background
-           	    document.getElementById('option1').style.background = "lightgrey";
-	            document.getElementById('option2').style.background = "lightgrey";
-	            document.getElementById('option3').style.background = "lightgrey";
-	            document.getElementById('option4').style.background = "lightgrey";
+function resetBackground(){
+    
+    // Reset Background
+	document.getElementById('option1').style.background = "lightgrey";
+    document.getElementById('option2').style.background = "lightgrey";
+    document.getElementById('option3').style.background = "lightgrey";
+    document.getElementById('option4').style.background = "lightgrey";
 
-                // Reset Color
-	            document.getElementById('option1').style.color = "Black";
-	            document.getElementById('option2').style.color = "Black";
-	            document.getElementById('option3').style.color = "Black";
-	            document.getElementById('option4').style.color = "Black";
-           }
+    // Reset Color
+    document.getElementById('option1').style.color = "Black";
+    document.getElementById('option2').style.color = "Black";
+    document.getElementById('option3').style.color = "Black";
+    document.getElementById('option4').style.color = "Black";
+}
 
             
 
@@ -143,7 +143,7 @@
 
                             console.log('success');
                             console.log(data);
-                            
+
                             var myData = JSON.stringify(data);
                             var parseDate = JSON.parse(myData);
                             if (parseDate[0].answer === undefined || parseDate[0].answer === null) {

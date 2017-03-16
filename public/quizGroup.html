@@ -21,11 +21,11 @@ $(function(){
         {
             // Advance only if there is a correct answer
         	if( document.getElementById('option1').style.background == "green" ||
-        		document.getElementById('option2').style.background == "green" ||
-        		document.getElementById('option3').style.background == "green" || 
-        		document.getElementById('option4').style.background == "green" ||
-        		id == 0)
-        	{
+        		  document.getElementById('option2').style.background == "green" ||
+        		  document.getElementById('option3').style.background == "green" || 
+        		  document.getElementById('option4').style.background == "green" ||
+        		  id == 0)
+        	 {
                 id++;
 
                 if(id != 1)
@@ -94,7 +94,7 @@ function parseJson(parseDate)
 function resetBackground(){
     
     // Reset Background
-	document.getElementById('option1').style.background = "lightgrey";
+	  document.getElementById('option1').style.background = "lightgrey";
     document.getElementById('option2').style.background = "lightgrey";
     document.getElementById('option3').style.background = "lightgrey";
     document.getElementById('option4').style.background = "lightgrey";

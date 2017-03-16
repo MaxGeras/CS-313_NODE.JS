@@ -20,21 +20,17 @@ $(function(){
         if( id < 10)
         {
             // Advance only if there is a correct answer
-        	if( document.getElementById('option1').style.background == "green" ||
-        		  document.getElementById('option2').style.background == "green" ||
-        		  document.getElementById('option3').style.background == "green" || 
-        		  document.getElementById('option4').style.background == "green" ||
+        	if( document.getElementById('option1').style.background === "green" ||
+        		  document.getElementById('option2').style.background === "green" ||
+        		  document.getElementById('option3').style.background === "green" || 
+        		  document.getElementById('option4').style.background === "green" ||
         		  id == 0)
         	 {
                 id++;
 
                 if(id != 1)
              		move();
-            }
-            else
-            {
-
-            }
+           
 
              
             // Reset
@@ -59,6 +55,7 @@ $(function(){
 
                     }
                 });
+      }
 		}
 		else
 		{
@@ -146,10 +143,11 @@ function checkAnswer(elementId){
 
                 var myData = JSON.stringify(data);
                 var parseDate = JSON.parse(myData);
+
                 if (parseDate[0].answer === undefined || parseDate[0].answer === null) {
                    document.getElementById(elementId).style.backgroundColor = "red";
-				}	
-				else{
+        				}	
+        				else{
                   document.getElementById(elementId).style.backgroundColor = "green";
                 }
 
@@ -199,15 +197,16 @@ function move() {
 
 
 function mDown(obj) {
-   if( document.getElementById('option1').style.background == "green" ||
-       document.getElementById('option2').style.background == "green" ||
-       document.getElementById('option3').style.background == "green" || 
-       document.getElementById('option4').style.background == "green" )
+
+   if( document.getElementById('option1').style.background === "green" ||
+       document.getElementById('option2').style.background === "green" ||
+       document.getElementById('option3').style.background === "green" || 
+       document.getElementById('option4').style.background === "green" )
    {
-	   	   obj.style.backgroundColor = "Lime";
+	   	 obj.style.backgroundColor = "Lime";
    	   obj.innerHTML = "Correct Answer";
    }
-   else if( id ===0)
+   else if( id === 0 )
    {
 
    }
@@ -219,6 +218,7 @@ function mDown(obj) {
 }
 
 function mUp(obj) {
+
 	obj.style.backgroundColor="DarkBlue";
 
 }

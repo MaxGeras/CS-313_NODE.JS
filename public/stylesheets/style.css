@@ -86,6 +86,15 @@ html
 	color: Navy;
 }
 
+#login{
+	color: white;
+    font-size:25px;
+}
+
+#password{
+	color:white;
+	font-size:25px;
+}
 .button2 {
     background-color: Aquamarine; 
     color: black; 

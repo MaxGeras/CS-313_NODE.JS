@@ -204,7 +204,7 @@ function updateQuiz(count)
     console.log("updateQuiz() questions");
     console.log(count);
 
-   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   
   if (err) throw err;   
    const query = client.query(
@@ -218,7 +218,7 @@ function updateQuiz(count)
                   console.log('ROW QuizInfo with ID: ' + result.rows[0].id);
               }
 
-          }); 
+       }); 
   });
 }
 

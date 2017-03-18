@@ -33,12 +33,6 @@ app.get('/getquiz', function(request, response) {
               done();
              return response.json(results);
         });
-
-        pool.on('error', function (err, client) {
-
-          console.error('idle client error', err.message, err.stack)
-       });
-
     });
 });
 
@@ -103,12 +97,6 @@ app.get('/getanswer', function(request, response) {
         done();
        return response.json(results);
   });
-
-  pool.on('error', function (err, client) {
-
-    console.error('idle client error', err.message, err.stack)
- });
-
  });
 });
 
@@ -141,12 +129,6 @@ app.get('/authenticate', function(request, response) {
           done();
          return response.json(results);
     });
-
-    pool.on('error', function (err, client) {
-
-      console.error('idle client error', err.message, err.stack)
-   });
-
   });
 });
  
@@ -241,10 +223,6 @@ function updateQuiz(count)
               }
 
           }); 
-      
-      pool.on('error', function (err, client) {
-        console.error('idle client error', err.message, err.stack);
-     });
   });
 }
 

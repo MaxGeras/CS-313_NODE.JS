@@ -6,6 +6,47 @@
 	   <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>	
        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
+
+</head>
+<body>
+<h1 id="head">Enter your group credential to begin a quiz</h1>
+
+<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
+<form action="" method="get" id="form">
+
+    <p id="log"> Login: </p>
+     <input type="text" name="user" onkeypress="inputAuth(this.id)" id="user" required><br>
+    <p id="password"> Password: </p>
+     <input type="text" name="pass"  onkeypress="inputAuth(this.id)" id="pass" required> 
+     <br>
+     <br>	
+	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1" onclick="startQuiz()">
+	 Log in</button> 
+
+</form>
+
+<div id="question"></div><br>
+<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option1" id="option1">
+</div><br>
+
+<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option2" id="option2">
+</div><br>
+
+<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option3" id="option3">
+</div><br>
+
+<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option4" id="option4">
+</div><br>
+<div id="final"><div><br>
+
+
+<div id="myProgress" >
+  <div id="myBar"></div>
+</div>
+
+
+
+
 	<script type="text/javascript">
           
 function resetLoginPage()
@@ -336,42 +377,5 @@ function startQuiz(){
     	localStorage.setItem("login", "true");
     }
   	</script>
-</head>
-<body>
-<h1 id="head">Enter your group credential to begin a quiz</h1>
-
-<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
-<form action="" method="get" id="form">
-
-    <p id="log"> Login: </p>
-     <input type="text" name="user" onkeypress="inputAuth(this.id)" id="user" required><br>
-    <p id="password"> Password: </p>
-     <input type="text" name="pass"  onkeypress="inputAuth(this.id)" id="pass" required> 
-     <br>
-     <br>	
-	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1" onclick="startQuiz()">
-	 Log in</button> 
-
-</form>
-
-<div id="question"></div><br>
-<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option1" id="option1">
-</div><br>
-
-<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option2" id="option2">
-</div><br>
-
-<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option3" id="option3">
-</div><br>
-
-<div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option4" id="option4">
-</div><br>
-<div id="final"><div><br>
-
-
-<div id="myProgress" >
-  <div id="myBar"></div>
-</div>
-
 </body>
 </html>

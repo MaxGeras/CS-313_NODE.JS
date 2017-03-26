@@ -34,7 +34,7 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new FacebookStrategy({
     clientID: 143125189548390,
-    clientSecret: 6,
+    clientSecret: '6fe09041085c76e13ebd2a3a141f889b',
     callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback"
     //profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
   },

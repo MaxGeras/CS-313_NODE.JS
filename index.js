@@ -8,19 +8,16 @@ var count = require('./globaldata.js');
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
 
+var LocalStrategy    = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded())
 
 app.use(bodyParser.json()); 
 
-passport.serializeUser(function(user, done) {
-  done(null, user.facebookId);
-});
-passport.deserializeUser(function(id, done) {
-  routes.findUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
+
 
 
 app.use(passport.initialize()); 
@@ -30,37 +27,12 @@ passport.use(new FacebookStrategy({
     clientID: 143125189548390,
     clientSecret: 6,
     callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback",
-     profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
+    profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
   },
  function(accessToken, refreshToken, profile, done) {
-  db.userCatalog.findOne({ facebookId: profile.id }, function(err, existingUser) {
-    if (err) {
-      return done(err);
-    }
-    else {
-      if(existingUser) {
-        console.log('User: ' + existingUser.name + ' found and logged in!');
-        done(null, existingUser);
-        } 
-      else {
-        new db.userCatalog({
-        name: profile.displayName,
-        facebookId: profile.id,
-        link: profile.link,
-        picture: profile.photos[0].value,
-        bio: profile.about_me,
-        email: profile.email
-        }).save(function (err, data) {
-          if (err) {
-            return done(err);
-          }
-          else {
-            console.log('New user: ' + data + ' created and logged in!');
-            done(null, data);
-          }
-        });
-      }
-    }
+  User.findOne({ facebookId: profile.id }, function(err, user) {
+    if (err) { return done(err); }
+      done(null, user);
   });
 }
 ));
@@ -76,6 +48,15 @@ app.get('/auth/facebook/callback',
 app.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
 );
+
+passport.serializeUser(function(user, done) {
+  done(null, user.facebookId);
+});
+passport.deserializeUser(function(id, done) {
+  routes.findUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 
 

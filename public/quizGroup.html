@@ -291,16 +291,16 @@ function startQuiz(){
             	 document.getElementById(elementId).style.backgroundColor = "white";
             }
 
-            function resetLoginPage()
-            {
-               document.getElementById('login').style.display = "none";
-               document.getElementById('password').style.display = "none";
-                document.getElementById('faceBook').style.display = "none";
-               document.getElementById('user').style.display = "none";
-               document.getElementById('pass').style.display = "none";
-               document.getElementById('button1').innerHTML = "Start Quiz";
-               document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
-            }
+function resetLoginPage()
+{
+   document.getElementById('log').style.display = "none";
+   document.getElementById('password').style.display = "none";
+   document.getElementById('faceBook').style.display = "none";
+   document.getElementById('user').style.display = "none";
+   document.getElementById('pass').style.display = "none";
+   document.getElementById('button1').innerHTML = "Start Quiz";
+   document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
+}
 
             function updateQuiz()
             {
@@ -341,7 +341,7 @@ function startQuiz(){
 <a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
 <form action="" method="get" id="form">
 
-    <p id="login"> Login: </p>
+    <p id="log"> Login: </p>
      <input type="text" name="user" onkeypress="inputAuth(this.id)" id="user" required><br>
     <p id="password"> Password: </p>
      <input type="text" name="pass"  onkeypress="inputAuth(this.id)" id="pass" required> 

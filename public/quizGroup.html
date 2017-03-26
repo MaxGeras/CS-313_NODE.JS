@@ -291,7 +291,16 @@ function startQuiz(){
             	 document.getElementById(elementId).style.backgroundColor = "white";
             }
 
-
+function resetLoginPage()
+{
+   document.getElementById('log').style.visibility = "hidden";
+   document.getElementById('password').style.display = "none";
+   document.getElementById('faceBook').style.display = "none";
+   document.getElementById('user').style.display = "none";
+   document.getElementById('pass').style.display = "none";
+   document.getElementById('button1').innerHTML = "Start Quiz";
+   document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
+}
 
             function updateQuiz()
             {
@@ -342,19 +351,6 @@ function startQuiz(){
 	 Log in</button> 
 
 </form>
-<script type="text/javascript">
-	function resetLoginPage()
-{
-   document.getElementById('log').style.display = "none";
-   document.getElementById('password').style.display = "none";
-   document.getElementById('faceBook').style.display = "none";
-   document.getElementById('user').style.display = "none";
-   document.getElementById('pass').style.display = "none";
-   document.getElementById('button1').innerHTML = "Start Quiz";
-   document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
-}
-	
-</script>
 
 <div id="question"></div><br>
 <div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option1" id="option1">

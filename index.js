@@ -28,8 +28,10 @@ passport.use(new FacebookStrategy({
     clientSecret: 6,
     callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
+
   },
  function(accessToken, refreshToken, profile, done) {
+  console.log("Set up phase.....");
   User.findOne({ facebookId: profile.id }, function(err, user) {
     if (err) { return done(err); }
       done(null, user);
@@ -43,8 +45,9 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback', function( request, response){
    
+   console.log("Redirect phase.....");
   var myId = request.query.code;
-
+  
   if(myId != NULL)
   {
       passport.authenticate('facebook', { successRedirect: '/test.html',

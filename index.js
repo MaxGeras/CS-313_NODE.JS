@@ -5,6 +5,54 @@ var uRl = require('url');
 var pg = require('pg');
 var count = require('./globaldata.js');
 
+var passport = require('passport')
+  , FacebookStrategy = require('passport-facebook').Strategy;
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded())
+
+app.use(bodyParser.json()); 
+
+passport.serializeUser(function(user, done) {
+  done(null, user.facebookId);
+});
+passport.deserializeUser(function(id, done) {
+  routes.findUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+
+app.use(passport.initialize()); 
+app.use(passport.session());
+
+passport.use(new FacebookStrategy({
+    clientID: 143125189548390,
+    clientSecret: 851e429,
+    callbackURL: "http://localhost:5000/auth/facebook/callback",
+     profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ facebookId: profile.id }, function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/test.html',
+                                      failureRedirect: '/quizGroup.html' }));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
+);
+
+
 
 pg.defaults.ssl = true;
  

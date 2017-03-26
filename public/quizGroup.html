@@ -20,7 +20,7 @@
      <input type="text" name="pass"  onkeypress="inputAuth(this.id)" id="pass" required> 
      <br>
      <br>	
-	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1" onclick="startQuiz()">
+	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1">
 	 Log in</button> 
 
 </form>
@@ -66,15 +66,17 @@
         	}
 }
 
-function startQuiz(){
+  $(function(){
 
+    $('.button').click(function(e){
+        e.preventDefault();
+        console.log(login);
 
         if(localStorage.getItem("isLogged")  === "true")
         {	
         	console.log(login);
 
         	
-
             if( id < 10 )
             {
                 // Advance only if there is a correct answer
@@ -124,259 +126,257 @@ function startQuiz(){
 		{
             loginCheck();
 		}
-   			
-}
+    });				
+});
 
 function resetLoginPage()
 {
-   document.getElementById('log').style.visibility = "none";
+   document.getElementById('log').style.display = "none";
    document.getElementById('password').style.display = "none";
    document.getElementById('faceBook').style.display = "none";
    document.getElementById('user').style.display = "none";
    document.getElementById('pass').style.display = "none";
    document.getElementById('button1').innerHTML = "Start Quiz";
    document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
-   login = true;
    
 }
 
-           function parseJson(parseDate)
-           {
+function parseJson(parseDate)
+{
 
-		        document.getElementById("question").innerHTML = id + ". " + parseDate[0].question;
-		        document.getElementById("option1").innerHTML = parseDate[0].option1;
-		        document.getElementById("option2").innerHTML = parseDate[0].option2;
-	            document.getElementById("option3").innerHTML = parseDate[0].option3;
-	            document.getElementById("option4").innerHTML = parseDate[0].option4;
-	            document.getElementById("button1").innerHTML = "Next Question";
-	            document.getElementById("head").innerHTML = "Ten Questions About Countries";
+    document.getElementById("question").innerHTML = id + ". " + parseDate[0].question;
+    document.getElementById("option1").innerHTML = parseDate[0].option1;
+    document.getElementById("option2").innerHTML = parseDate[0].option2;
+    document.getElementById("option3").innerHTML = parseDate[0].option3;
+    document.getElementById("option4").innerHTML = parseDate[0].option4;
+    document.getElementById("button1").innerHTML = "Next Question";
+    document.getElementById("head").innerHTML = "Ten Questions About Countries";
 
-	            document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox");
-	            document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox1"); 
-	            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox1"); 
-	            if( id == 1)
-	            {
-	                document.getElementById('myProgress').setAttribute("style","width:500px");	
-	            	document.getElementById("myBar").innerHTML = "0%";	
-	           	}
-	            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "buttom");
-           }
+    document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox");
+    document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox1"); 
+    document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox1"); 
+    if( id == 1)
+    {
+        document.getElementById('myProgress').setAttribute("style","width:500px");	
+    	document.getElementById("myBar").innerHTML = "0%";	
+   	}
+    document.getElementsByTagName("BUTTON")[0].setAttribute("class", "buttom");
+}
 
-           function resetBackground(){
-                
-                // Reset Background
-           	    document.getElementById('option1').style.background = "lightgrey";
-	            document.getElementById('option2').style.background = "lightgrey";
-	            document.getElementById('option3').style.background = "lightgrey";
-	            document.getElementById('option4').style.background = "lightgrey";
+function resetBackground(){
+    
+    // Reset Background
+	    document.getElementById('option1').style.background = "lightgrey";
+    document.getElementById('option2').style.background = "lightgrey";
+    document.getElementById('option3').style.background = "lightgrey";
+    document.getElementById('option4').style.background = "lightgrey";
 
-                // Reset Color
-	            document.getElementById('option1').style.color = "Black";
-	            document.getElementById('option2').style.color = "Black";
-	            document.getElementById('option3').style.color = "Black";
-	            document.getElementById('option4').style.color = "Black";
-           }
+    // Reset Color
+    document.getElementById('option1').style.color = "Black";
+    document.getElementById('option2').style.color = "Black";
+    document.getElementById('option3').style.color = "Black";
+    document.getElementById('option4').style.color = "Black";
+}
 
             
 
-           function ChangeColor(elementId)
-           {
+function ChangeColor(elementId)
+{
 
-           		if( document.getElementById(elementId).style.backgroundColor != "green")
-           		{
-           			document.getElementById(elementId).style.background = "Navy";
-  					document.getElementById(elementId).style.color = "White";
-  				}
-           }
+		if( document.getElementById(elementId).style.backgroundColor != "green")
+		{
+			document.getElementById(elementId).style.background = "Navy";
+			document.getElementById(elementId).style.color = "White";
+		}
+}
 
-           function changeBack(elementId)
-           {
-           		if( document.getElementById(elementId).style.backgroundColor != "green")
-           		{
-           			document.getElementById(elementId).style.background = "lightgrey";
-  					document.getElementById(elementId).style.color = "Black";
-          		 }
-           }
+function changeBack(elementId)
+{
+		if( document.getElementById(elementId).style.backgroundColor != "green")
+		{
+			document.getElementById(elementId).style.background = "lightgrey";
+			document.getElementById(elementId).style.color = "Black";
+		 }
+}
 
-           function checkAnswer(elementId){
+function checkAnswer(elementId){
 
-           	    var data = {};
-					data.answer = document.getElementById(elementId).getAttribute('value');
-					data.id = id;
-				
+	    var data = {};
+		data.answer = document.getElementById(elementId).getAttribute('value');
+		data.id = id;
+	
 
-           		$.ajax({
-						type: 'get',
-						data: data,
-				        contentType: 'application/json',
-                        url: 'https://pure-sands-99613.herokuapp.com/getanswer',						
-                        success: function(data) {
+		$.ajax({
+			type: 'get',
+			data: data,
+	        contentType: 'application/json',
+            url: 'https://pure-sands-99613.herokuapp.com/getanswer',						
+            success: function(data) {
 
-                            console.log('success');
-                            console.log(data);
-                            var myData = JSON.stringify(data);
-                            var parseDate = JSON.parse(myData);
-                            if (parseDate[0].answer === undefined || parseDate[0].answer === null) {
-                               document.getElementById(elementId).style.backgroundColor = "red";
-							}	
-							else{
-                              document.getElementById(elementId).style.backgroundColor = "green";
-                            }
+                console.log('success');
+                console.log(data);
+                var myData = JSON.stringify(data);
+                var parseDate = JSON.parse(myData);
+                if (parseDate[0].answer === undefined || parseDate[0].answer === null) {
+                   document.getElementById(elementId).style.backgroundColor = "red";
+				}	
+				else{
+                  document.getElementById(elementId).style.backgroundColor = "green";
+                }
 
-                        }
-                    });
-
-           }
-
-
-            function loginCheck(){
-
-           	    var data = {};
-					data.user = document.getElementById('user').value;
-					data.pass = document.getElementById('pass').value;
-				
-
-           		$.ajax({
-						type: 'get',
-						data: data,
-				        contentType: 'application/json',
-                        url: 'https://pure-sands-99613.herokuapp.com/authenticate',						
-                        success: function(data) {
-
-                            console.log('success');
-                            console.log(data);
-                            var myData = JSON.stringify(data);
-                            var parseDate = JSON.parse(myData);
-
-                            if (parseDate[0].user_group === undefined || 
-                            	parseDate[0].user_group === null) {
-                               document.getElementById('user').style.backgroundColor = "red";
-                          		 document.getElementById('pass').style.backgroundColor = "red";
-							}	
-							else{
-                              document.getElementById('button1').style.backgroundColor = "Lime";
-                              localStorage.setItem("isLogged","true");
-                              console.log("Reset: " + login);
-
-                              resetLoginPage();
-                            }
-                        
-                        }
-                    });
-
-           }
-
-
-           function resetAll(){
-
-           	 		document.getElementById("question").innerHTML = "";
-		            document.getElementById("option1").innerHTML = "";
-		            document.getElementById("option2").innerHTML = "";
-		            document.getElementById("option3").innerHTML = "";
-		            document.getElementById("option4").innerHTML = "";
-		            document.getElementById("button1").innerHTML = "Log Out";
-		            document.getElementById("head").innerHTML = "";
-		            document.getElementById("final").innerHTML = 
-		            "Congratulations! You have completed the Quiz";
-		            document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox2");
-		            document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox2"); 
-		            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
-		            document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
-		            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
-		            localStorage.clear();
-
-
-           }
-
-
-             function move() {
-
-					var elem = document.getElementById('myBar');
-					
-					width += 10;
-					var myId = setInterval(frame, 10);
-					function frame() {
-					if (width > 100) {
-					  clearInterval(myId);
-					} else {
-					  elem.style.width = width + '%'; 
-					  elem.innerHTML = width * 1  + '%';
-					}
-				}
-			}
-
-
-
-			function mDown(obj) {
-
-				if(id < 10)
-				{	
-				   if( document.getElementById('option1').style.background == "green" ||
-	                   document.getElementById('option2').style.background == "green" ||
-	                   document.getElementById('option3').style.background == "green" || 
-	                   document.getElementById('option4').style.background == "green" 
-
-	                 )
-				   {
-	 			   	   obj.style.backgroundColor = "Lime";
-	    		   	   obj.innerHTML = "Correct Answer";
-	    		   }
-	    		   else if( id === 0)
-	    		   {
-
-	    		   }
-	    		   else
-	    		   {
-	    		   	   obj.style.backgroundColor = "Red";
-	    		   	   obj.innerHTML = "Select Answer";
-	    		   }
-	    		}
-			}
-
-			function mUp(obj) {
-    			obj.style.backgroundColor="DarkBlue";
- 
             }
+        });
 
-            function inputAuth(elementId){
-            	 document.getElementById(elementId).style.backgroundColor = "white";
+}
+
+
+function loginCheck(){
+
+	    var data = {};
+		data.user = document.getElementById('user').value;
+		data.pass = document.getElementById('pass').value;
+	
+
+		$.ajax({
+			type: 'get',
+			data: data,
+	        contentType: 'application/json',
+            url: 'https://pure-sands-99613.herokuapp.com/authenticate',						
+            success: function(data) {
+
+                console.log('success');
+                console.log(data);
+                var myData = JSON.stringify(data);
+                var parseDate = JSON.parse(myData);
+
+                if (parseDate[0].user_group === undefined || 
+                	parseDate[0].user_group === null) {
+                   document.getElementById('user').style.backgroundColor = "red";
+              		 document.getElementById('pass').style.backgroundColor = "red";
+				}	
+				else{
+                  document.getElementById('button1').style.backgroundColor = "Lime";
+                  localStorage.setItem("isLogged","true");
+
+                  resetLoginPage();
+                }
+            
             }
+        });
 
-            function updateQuiz()
-            {
+}
 
-            	if( id == 10)
-            	{	
-		            	var data = {};
-		            	data.id = "";
-		            	console.log("I am calling server....");
 
-		            	$.ajax({
-								type: 'get',
-								data: data,
-						        contentType: 'application/json',
-		                        url: 'https://pure-sands-99613.herokuapp.com/updateQuiz',						
-		                        success: function(data) {
-		                        	console.log(data);
-		                           	resetAll();
-		                        }
-		                 });
-            	}
-            	else
-            	{
-            		resetAll();
-            	}
-            }
+function resetAll(){
 
-    function facebook()
-    {
-    	console.log("Here");
-    	localStorage.setItem("isLogged", "true");
-    }
+	 		document.getElementById("question").innerHTML = "";
+        document.getElementById("option1").innerHTML = "";
+        document.getElementById("option2").innerHTML = "";
+        document.getElementById("option3").innerHTML = "";
+        document.getElementById("option4").innerHTML = "";
+        document.getElementById("button1").innerHTML = "Log Out";
+        document.getElementById("head").innerHTML = "";
+        document.getElementById("final").innerHTML = 
+        "Congratulations! You have completed the Quiz";
+        document.getElementsByTagName("DIV")[0].setAttribute("class", "myBox2");
+        document.getElementsByTagName("DIV")[1].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[2].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[3].setAttribute("class", "myBox2"); 
+        document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
+        document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
+        document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
+        localStorage.clear();
+
+
+}
+
+
+function move() {
+
+	var elem = document.getElementById('myBar');
+	
+	width += 10;
+	var myId = setInterval(frame, 10);
+	function frame() {
+	if (width > 100) {
+	  clearInterval(myId);
+	} else {
+	  elem.style.width = width + '%'; 
+	  elem.innerHTML = width * 1  + '%';
+	}
+  }
+}
+
+
+
+function mDown(obj) {
+
+if(id < 10)
+{	
+   if( document.getElementById('option1').style.background == "green" ||
+       document.getElementById('option2').style.background == "green" ||
+       document.getElementById('option3').style.background == "green" || 
+       document.getElementById('option4').style.background == "green" 
+
+     )
+   {
+	   	   obj.style.backgroundColor = "Lime";
+   	   obj.innerHTML = "Correct Answer";
+   }
+   else if( id === 0)
+   {
+
+   }
+   else
+   {
+   	   obj.style.backgroundColor = "Red";
+   	   obj.innerHTML = "Select Answer";
+   }
+}
+}
+
+function mUp(obj) {
+obj.style.backgroundColor="DarkBlue";
+
+}
+
+function inputAuth(elementId){
+ document.getElementById(elementId).style.backgroundColor = "white";
+}
+
+function updateQuiz()
+{
+
+if( id == 10)
+{	
+    	var data = {};
+    	data.id = "";
+    	console.log("I am calling server....");
+
+    	$.ajax({
+				type: 'get',
+				data: data,
+		        contentType: 'application/json',
+                url: 'https://pure-sands-99613.herokuapp.com/updateQuiz',						
+                success: function(data) {
+                	console.log(data);
+                   	resetAll();
+                }
+         });
+}
+else
+{
+	resetAll();
+}
+}
+
+function facebook()
+{
+console.log("Here");
+localStorage.setItem("isLogged", "true");
+}
   	</script>
 </body>
 </html>

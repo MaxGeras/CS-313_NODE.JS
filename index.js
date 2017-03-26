@@ -41,9 +41,16 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/test.html',
-                                      failureRedirect: '/quizGroup.html' }));
+app.get('/auth/facebook/callback', function( request, response){
+   
+  var myId = request.query.code;
+
+  if(myId != NULL)
+  {
+      passport.authenticate('facebook', { successRedirect: '/test.html',
+                                        failureRedirect: '/quizGroup.html' })
+  }
+});
 
 app.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })

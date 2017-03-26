@@ -2,18 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Group Quiz </title>
-	   <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>	
-       <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-
-
+   <title> Group Quiz </title>
+   <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>	
+   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 <body>
 <h1 id="head">Enter your group credential to begin a quiz</h1>
 
-
 <form action="" method="get" id="form" novalidate>
-
     <p id="log"> Login: </p>
      <input type="text" name="user" onkeypress="inputAuth(this.id)" id="user" required><br>
     <p id="password"> Password: </p>
@@ -22,7 +18,6 @@
      <br>	
 	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1">
 	 Log in</button> 
-
 </form>
 
 <div id="question"></div><br>
@@ -39,11 +34,15 @@
 </div><br>
 <div id="final"><div><br>
 
+<iframe width="0" height="0" src="https://www.youtube.com/embed/5AnkytyIdMw?autoplay=1" 
+        frameborder="0" style="visibility: hidden;" allowfullscreen></iframe>
 
 <div id="myProgress" >
   <div id="myBar"></div>
 </div>
 
+
+<!-- FACEBOOK ICON-->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -56,25 +55,24 @@
 <a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
 
 <script type="text/javascript">
-          
-          
-           // Find quiz by id in database
-           var id = 0;
-           var width = 0;
-           var login = false;
-           var user = "";
-           var tries = 1;
+                    
+// Find quiz by id in database
+var id = 0;
+var width = 0;
+var login = false;
+var user = "";
+var tries = 1;
         
           
- if (localStorage.getItem("isLogged") != null) {
+if (localStorage.getItem("isLogged") != null) {
 
-        	if(localStorage.getItem("isLogged") === "true")
-        	{
-            	resetLoginPage();
-        	}
+	if(localStorage.getItem("isLogged") === "true")
+	{
+		resetLoginPage();
+	}
 }
 
-  $(function(){
+$(function(){
 
     $('.button').click(function(e){
         e.preventDefault();
@@ -386,6 +384,6 @@ function facebook()
 console.log("Here");
 localStorage.setItem("isLogged", "true");
 }
-  	</script>
+</script>
 </body>
 </html>

@@ -23,12 +23,20 @@ app.use(bodyParser.json());
 app.use(passport.initialize()); 
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+  done(null, user.facebookId);
+});
+passport.deserializeUser(function(id, done) {
+  routes.findUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 passport.use(new FacebookStrategy({
     clientID: 143125189548390,
     clientSecret: 6,
-    callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback",
-    profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
-
+    callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback"
+    //profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
   },
  function(accessToken, refreshToken, profile, done) {
   console.log("Set up phase.....");
@@ -43,6 +51,7 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
+/*
 app.get('/auth/facebook/callback', function( request, response){
    
    console.log("Redirect phase.....");
@@ -54,6 +63,24 @@ app.get('/auth/facebook/callback', function( request, response){
                                         failureRedirect: '/quizGroup.html' })
   }
 });
+*/
+
+app.get('/auth/facebook/callback', (req, res, next) => {
+    passport.authenticate('facebook', (err) => {
+        if (err) {
+            console.error(err);
+            return res.json({
+                success: false,
+                message: err.message
+            });
+        } else {
+            // do something else
+             successRedirect: '/test.html';
+              
+        }
+    })(req, res, next);
+});
+
 
 app.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })

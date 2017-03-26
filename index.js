@@ -24,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-  done(null, user.facebookId);
+  done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
   routes.findUserById(id, function(err, user) {
@@ -36,16 +36,15 @@ passport.use(new FacebookStrategy({
     clientID: "143125189548390",
     clientSecret: "6fe09041085c76e13ebd2a3a141f889b",
     callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback"
-    //profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
   },
  function(accessToken, refreshToken, profile, done) {
-  console.log("Set up phase.....");
-  User.findOne({ facebookId: profile.id }, function(err, user) {
-    if (err) { return done(err); }
+  console.log("We");
+      var user = Object();
+          user.id = profile.id;
+          user.name = profile.name;
+          console.log("Here");
       done(null, user);
-  });
-}
-));
+}));
 
 
 
@@ -65,7 +64,9 @@ app.get('/auth/facebook/callback', function( request, response){
 });
 */
 
+/*
 app.get('/auth/facebook/callback', (req, res, next) => {
+   console.log("Here");
     passport.authenticate('facebook', (err) => {
         if (err) {
             console.error(err);
@@ -74,26 +75,26 @@ app.get('/auth/facebook/callback', (req, res, next) => {
                 message: err.message
             });
         } else {
-            // do something else
-             successRedirect: '/test.html';
+          console.log("Success");
+             var result = {status:"success"};
+             return res.json(result);
               
         }
     })(req, res, next);
 });
+*/
+
+ app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/quizGroup.html',
+            failureRedirect : '/test.html'
+        }));
+
 
 
 app.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
 );
-
-passport.serializeUser(function(user, done) {
-  done(null, user.facebookId);
-});
-passport.deserializeUser(function(id, done) {
-  routes.findUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
 
 
 

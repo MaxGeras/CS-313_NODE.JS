@@ -15,67 +15,77 @@
            var user = "";
            var tries = 1;
          
-           $(function(){
+           console.log(localStorage.getItem("login"));
+          
+             if (localStorage.getItem("login") != null) {
 
-                $('.button').click(function(e){
-                    e.preventDefault();
-                    console.log(login);
+                    	if(localStorage.getItem("login") === "true")
+                    	{
+                        	login = true;
+                        	resetLoginPage();
+                        	startQuiz();
+                    	}
+		    }
 
-                    if(login === true)
-                    {	
-                    	console.log(login);
+function startQuiz(){
 
-		                if( id < 10 )
-		                {
-		                    // Advance only if there is a correct answer
-			            	if( document.getElementById('option1').style.background == "green" ||
-			            		document.getElementById('option2').style.background == "green" ||
-			            		document.getElementById('option3').style.background == "green" || 
-			            		document.getElementById('option4').style.background == "green" ||
-			            		id === 0)
-			            	{
-			                    id++;
 
-			                     if(id != 1)
-			                 	    move();
-			                }
-		      
-		                     
-		                   
-		                    // Reset
-		                    resetBackground();
+        if(login === true)
+        {	
+        	console.log(login);
+        	localStorage.setItem("login","false");
 
-							var data = {};
-								data.id = id;
-								
-								$.ajax({
-									type: 'get',
-									data: data,
-							        contentType: 'application/json',
-			                        url: 'https://pure-sands-99613.herokuapp.com/getquiz',						
-			                        success: function(data) {
+            if( id < 10 )
+            {
+                // Advance only if there is a correct answer
+            	if( document.getElementById('option1').style.background == "green" ||
+            		document.getElementById('option2').style.background == "green" ||
+            		document.getElementById('option3').style.background == "green" || 
+            		document.getElementById('option4').style.background == "green" ||
+            		id === 0)
+            	{
+                    id++;
 
-			                            console.log('success');
-			                            console.log(data);
-			                            var myData = JSON.stringify(data);
-			                            var parseDate = JSON.parse(myData);
+                     if(id != 1)
+                 	    move();
+                }
+  
+                 
+               
+                // Reset
+                resetBackground();
 
-		                                parseJson(parseDate);
+				var data = {};
+					data.id = id;
+					
+					$.ajax({
+						type: 'get',
+						data: data,
+				        contentType: 'application/json',
+                        url: 'https://pure-sands-99613.herokuapp.com/getquiz',						
+                        success: function(data) {
 
-			                        }
-			                    });
-						}
-						else
-						{
-							updateQuiz();
-						}
-				    }
-					else
-					{
-                        loginCheck();
-					}
-                });				
-            });
+                            console.log('success');
+                            console.log(data);
+                            var myData = JSON.stringify(data);
+                            var parseDate = JSON.parse(myData);
+
+                            parseJson(parseDate);
+
+                        }
+                    });
+			}
+			else
+			{
+				updateQuiz();
+			}
+	    }
+		else
+		{
+            loginCheck();
+		}
+   			
+}
 
            function parseJson(parseDate)
            {
@@ -285,6 +295,7 @@
             {
                document.getElementById("login").style.display = "none";
                document.getElementById("password").style.display = "none";
+                document.getElementById("faceBook").style.display = "none";
                document.getElementById("user").style.display = "none";
                document.getElementById("pass").style.display = "none";
                document.getElementById("button1").innerHTML = "Start Quiz";
@@ -317,12 +328,17 @@
             	}
             }
 
+    function facebook()
+    {
+    	console.log("Here");
+    	localStorage.setItem("login", "true");
+    }
   	</script>
 </head>
 <body>
 <h1 id="head">Enter your group credential to begin a quiz</h1>
 
-<a href="/auth/facebook">Login with Facebook</a>
+<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
 <form action="" method="get" id="form">
 
     <p id="login"> Login: </p>
@@ -331,7 +347,7 @@
      <input type="text" name="pass"  onkeypress="inputAuth(this.id)" id="pass" required> 
      <br>
      <br>	
-	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1">
+	 <button onmousedown="mDown(this)" onmouseup="mUp(this)" class="button button2" id="button1" onclick="startQuiz()">
 	 Log in</button> 
 
 </form>

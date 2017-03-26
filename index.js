@@ -32,12 +32,37 @@ passport.use(new FacebookStrategy({
     callbackURL: "https://pure-sands-99613.herokuapp.com/auth/facebook/callback",
      profileFields: ['id', 'displayName', 'link', 'about_me', 'photos', 'email']
   },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id }, function(err, user) {
-      if (err) { return done(err); }
-      done(null, user);
-    });
-  }
+ function(accessToken, refreshToken, profile, done) {
+  db.userCatalog.findOne({ facebookId: profile.id }, function(err, existingUser) {
+    if (err) {
+      return done(err);
+    }
+    else {
+      if(existingUser) {
+        console.log('User: ' + existingUser.name + ' found and logged in!');
+        done(null, existingUser);
+        } 
+      else {
+        new db.userCatalog({
+        name: profile.displayName,
+        facebookId: profile.id,
+        link: profile.link,
+        picture: profile.photos[0].value,
+        bio: profile.about_me,
+        email: profile.email
+        }).save(function (err, data) {
+          if (err) {
+            return done(err);
+          }
+          else {
+            console.log('New user: ' + data + ' created and logged in!');
+            done(null, data);
+          }
+        });
+      }
+    }
+  });
+}
 ));
 
 

@@ -49,18 +49,6 @@
 
 	<script type="text/javascript">
           
-function resetLoginPage()
-{
-   document.getElementById('log').style.visibility = "none";
-   document.getElementById('password').style.display = "none";
-   document.getElementById('faceBook').style.display = "none";
-   document.getElementById('user').style.display = "none";
-   document.getElementById('pass').style.display = "none";
-   document.getElementById('button1').innerHTML = "Start Quiz";
-   document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
-}
-
-
           
            // Find quiz by id in database
            var id = 0;
@@ -68,25 +56,24 @@ function resetLoginPage()
            var login = false;
            var user = "";
            var tries = 1;
-         
-           console.log(localStorage.getItem("login"));
+        
           
-             if (localStorage.getItem("login") != null) {
+ if (localStorage.getItem("isLogged") != null) {
 
-                    	if(localStorage.getItem("login") === "true")
-                    	{
-                        	login = true;
-                        	resetLoginPage();
-                    	}
-		    }
+        	if(localStorage.getItem("isLogged") === "true")
+        	{
+            	resetLoginPage();
+        	}
+}
 
 function startQuiz(){
 
 
-        if(login === true)
+        if(localStorage.getItem("isLogged")  === "true")
         {	
         	console.log(login);
-        	localStorage.setItem("login","false");
+
+        	
 
             if( id < 10 )
             {
@@ -138,6 +125,19 @@ function startQuiz(){
             loginCheck();
 		}
    			
+}
+
+function resetLoginPage()
+{
+   document.getElementById('log').style.visibility = "none";
+   document.getElementById('password').style.display = "none";
+   document.getElementById('faceBook').style.display = "none";
+   document.getElementById('user').style.display = "none";
+   document.getElementById('pass').style.display = "none";
+   document.getElementById('button1').innerHTML = "Start Quiz";
+   document.getElementById('head').innerHTML = "Ten Questions About Countries. <br> Good Luck! ";
+   login = true;
+   
 }
 
            function parseJson(parseDate)
@@ -257,7 +257,7 @@ function startQuiz(){
 							}	
 							else{
                               document.getElementById('button1').style.backgroundColor = "Lime";
-                              login = true;
+                              localStorage.setItem("isLogged","true");
                               console.log("Reset: " + login);
 
                               resetLoginPage();
@@ -287,6 +287,8 @@ function startQuiz(){
 		            document.getElementsByTagName("DIV")[4].setAttribute("class", "myBox2");
 		            document.getElementsByTagName("DIV")[5].setAttribute("class", "final"); 
 		            document.getElementsByTagName("BUTTON")[0].setAttribute("class", "final final1"); 
+		            localStorage.clear();
+
 
            }
 
@@ -373,7 +375,7 @@ function startQuiz(){
     function facebook()
     {
     	console.log("Here");
-    	localStorage.setItem("login", "true");
+    	localStorage.setItem("isLogged", "true");
     }
   	</script>
 </body>

@@ -12,7 +12,7 @@
 <h1 id="head">Enter your group credential to begin a quiz</h1>
 
 <a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
-<form action="" method="get" id="form">
+<form action="" method="get" id="form" novalidate>
 
     <p id="log"> Login: </p>
      <input type="text" name="user" onkeypress="inputAuth(this.id)" id="user" required><br>
@@ -51,7 +51,7 @@
           
 function resetLoginPage()
 {
-   document.getElementById('log').style.visibility = "hidden";
+   document.getElementById('log').style.visibility = "none";
    document.getElementById('password').style.display = "none";
    document.getElementById('faceBook').style.display = "none";
    document.getElementById('user').style.display = "none";
@@ -77,7 +77,6 @@ function resetLoginPage()
                     	{
                         	login = true;
                         	resetLoginPage();
-                        	startQuiz();
                     	}
 		    }
 

@@ -11,7 +11,7 @@
 <body>
 <h1 id="head">Enter your group credential to begin a quiz</h1>
 
-<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
+
 <form action="" method="get" id="form" novalidate>
 
     <p id="log"> Login: </p>
@@ -44,10 +44,18 @@
   <div id="myBar"></div>
 </div>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=143125189548390";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" id="icon"></div>
+<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
 
-
-
-	<script type="text/javascript">
+<script type="text/javascript">
           
           
            // Find quiz by id in database
@@ -132,6 +140,7 @@
 function resetLoginPage()
 {
    document.getElementById('log').style.display = "none";
+   document.getElementById('icon').style.display = "none";
    document.getElementById('password').style.display = "none";
    document.getElementById('faceBook').style.display = "none";
    document.getElementById('user').style.display = "none";

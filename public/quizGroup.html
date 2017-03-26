@@ -9,9 +9,18 @@
 
 </head>
 <body>
-<h1 id="head">Enter your group credential to begin a quiz</h1>
+<h1 id="head">Enter your group credentials to begin a quiz</h1>
 
-<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=143125189548390";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
 <form action="" method="get" id="form" novalidate>
 
     <p id="log"> Login: </p>
@@ -24,6 +33,10 @@
 	 Log in</button> 
 
 </form>
+<br>
+<div class="fb-login-button" data-max-rows="1" data-size="icon" data-show-faces="false" id="icon" data-auto-logout-link="false">
+</div>
+<a id="faceBook" onclick="facebook()" href="/auth/facebook">Login with Facebook</a>
 
 <div id="question"></div><br>
 <div onmouseover="ChangeColor(this.id)" onmouseleave="changeBack(this.id)" onclick="checkAnswer(this.id)" value="option1" id="option1">
@@ -132,6 +145,7 @@
 function resetLoginPage()
 {
    document.getElementById('log').style.display = "none";
+   document.getElementById('icon').style.display = "none";
    document.getElementById('password').style.display = "none";
    document.getElementById('faceBook').style.display = "none";
    document.getElementById('user').style.display = "none";
